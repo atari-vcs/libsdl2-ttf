@@ -1,0 +1,63 @@
+libsdl2-ttf (2.0.15+dfsg1-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream release.
+  * Verify signature of upstream tarball.
+  * Drop fix-ftbfs-892441.patch, fixed upstream. (Closes: #914486)
+
+ -- Felix Geyer <fgeyer@debian.org>  Sun, 03 Feb 2019 13:00:22 +0100
+
+libsdl2-ttf (2.0.14+dfsg1-3) unstable; urgency=medium
+
+  * d/patches:
+    - add fix-ftbfs-892441.patch: use pkg-config instead of
+      freetype-config, deprecated and about to be removed (Closes: #892441)
+  * Bump Policy Standards-Version to 4.2.1 (no changes needed)
+  * Switch to debhelper compat level 11
+  * Set "Rules-Requires-Root: no" in d/control
+  * d/copyright: use https in format URL
+  * d/watch:
+    - Switch to version=4
+    - Use https in URL
+  * d/control:
+    - Use https in Homepage URL
+    - Update Vcs-* URLs
+
+ -- Manuel A. Fernandez Montecelo <mafm@debian.org>  Fri, 19 Oct 2018 17:08:11 +0200
+
+libsdl2-ttf (2.0.14+dfsg1-2) unstable; urgency=medium
+
+  * Bump Policy Standards-Version to 4.0.0 (no changes needed)
+  * Update Vcs-* URLs
+  * Switch to debhelper compat level v10
+    - dh flags --parallel are not needed
+    - autoreconf is invoked by default
+  * Use automatic dbgsym packages, drop -dbg
+
+ -- Manuel A. Fernandez Montecelo <mafm@debian.org>  Mon, 31 Jul 2017 23:19:16 +0200
+
+libsdl2-ttf (2.0.14+dfsg1-1) unstable; urgency=medium
+
+  * New upstream release
+    - d/patches: drop link_libm_ftbfs_binutils-gold, support added upstream
+    - Does not cause the compilation warning upgraded to error
+      (Closes: #812621)
+    - d/rules: update shlib and .so symlink to current version
+  * Bump Policy Standards-Version to 3.9.6 (no changes needed)
+
+ -- Manuel A. Fernandez Montecelo <mafm@debian.org>  Tue, 02 Feb 2016 12:48:36 +0000
+
+libsdl2-ttf (2.0.12+dfsg1-2) unstable; urgency=low
+
+  * Build-Depends on pkg-config
+  * Do not call dh_autoreconf with ./autogen.sh as parameter, to force
+    using new config.{sub,guess} files, which important when having new
+    architectures (Closes: #727437)
+
+ -- Manuel A. Fernandez Montecelo <mafm@debian.org>  Tue, 29 Oct 2013 18:18:49 +0000
+
+libsdl2-ttf (2.0.12+dfsg1-1) unstable; urgency=low
+
+  * Initial release. (Closes: #719643)
+
+ -- Manuel A. Fernandez Montecelo <mafm@debian.org>  Tue, 13 Aug 2013 23:35:27 +0100

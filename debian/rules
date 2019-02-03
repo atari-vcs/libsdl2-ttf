@@ -1,0 +1,41 @@
+#!/usr/bin/make -f
+
+#export DH_VERBOSE=1
+
+
+export DEB_CFLAGS_MAINT_APPEND  := -pipe -Wall
+export DEB_LDFLAGS_MAINT_APPEND := -Wl,--as-needed
+
+
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+
+SHLIBVER := 2.0.14
+
+
+# export variables for autoreconf
+export AUTOMAKE := automake --foreign
+export ACLOCAL := aclocal --force --install -I /usr/share/aclocal/ -I acinclude
+
+
+%:
+	dh $@ --dbgsym-migration='libsdl2-ttf-dbg (<< 2.0.14+dfsg1-2~)'
+
+override_dh_auto_configure:
+	dh_auto_configure -- $(confflags)
+
+override_dh_install:
+	dh_install --fail-missing -XlibSDL2_ttf.la
+
+override_dh_installchangelogs:
+	dh_installchangelogs -- CHANGES.txt
+
+override_dh_link:
+	# fix lintian warning dev-pkg-without-shlib-symlink
+	dh_link -plibsdl2-ttf-dev usr/lib/$(DEB_HOST_MULTIARCH)/libSDL2_ttf-2.0.so.0 usr/lib/$(DEB_HOST_MULTIARCH)/libSDL2_ttf-2.0.so
+	dh_link --remaining-packages
+
+override_dh_compress:
+	dh_compress -Xglfont.c -Xshowfont.c
+
+override_dh_makeshlibs:
+	dh_makeshlibs -V"libsdl2-ttf-2.0-0 (>= $(SHLIBVER))"
